@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+*.egg
+
+# Environment
+.env
+.venv/
+venv/
+
+# Dataset - exclude splits, keep main dataset
+datasets/train.csv
+datasets/test.csv
+datasets/val.csv
+
+# Node
+node_modules/
+frontend/dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Qodo/OpenCode
+.qodo/
