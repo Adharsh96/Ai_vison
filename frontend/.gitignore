@@ -30,3 +30,4 @@ datasets/val.csv
 # Python cache
 __pycache__/
 *.pyc
+.vercel

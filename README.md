@@ -294,23 +294,50 @@ Open `http://localhost:5173` in your browser.
 
 ## Deployment
 
-### Vercel (Frontend + API)
+### Vercel (Frontend)
 
-Deploy everything (frontend + backend API) on Vercel with **no payment required**:
+Deploy the React frontend on Vercel for **free** (no credit card needed):
 
 1. Go to [Vercel](https://vercel.com/new) and import your `Ai_vison` repo
 2. **Root Directory**: set to `frontend/`
-3. Vite will auto-detect as the framework
-4. **No environment variables needed** — the Python serverless backend runs on the same domain
-5. Click **Deploy**
+3. Vite auto-detects as the framework
+4. **No build command or output directory changes needed**
+5. After deploy, add this environment variable in Vercel project settings:
+   - **Key**: `VITE_API_URL`
+   - **Value**: your PythonAnywhere backend URL (see below)
+   - **Environment**: Production
+6. **Redeploy** after adding the variable
 
-That's it. Vercel automatically:
-- Builds the React frontend with Vite
-- Deploys the Python FastAPI backend as Serverless Functions (`api/index.py`)
-- Rewrites `/api/*` requests to the Python handler
-- Routes all other paths to the SPA (`index.html`)
+Your frontend will be live at `https://ai-vison.vercel.app` (or your Vercel subdomain).
 
-Your app will be live at `https://ai-vison.vercel.app` (or your custom Vercel subdomain).
+### PythonAnywhere (Backend API — Free, no credit card)
+
+1. Go to [PythonAnywhere](https://www.pythonanywhere.com/) and create a **Free** account
+2. Go to **Dashboard → Web → Add a new web app**
+3. Choose **Manual configuration** → **Python 3.10**
+4. Open the **Files** tab and upload these files (preserving structure):
+   - `backend/app/` (entire folder)
+   - `backend/requirements.txt`
+   - `datasets/student_performance.csv`
+   - `model/trained_model.pkl`
+5. Open a **Bash console** and run:
+   ```bash
+   pip install --user -r backend/requirements.txt
+   ```
+6. Go to **Web → WSGI configuration file** and replace the content with:
+   ```python
+   import sys, os
+   sys.path.insert(0, os.path.dirname(__file__))
+   from app.main import app
+   ```
+7. Go to **Web → Static files**: add `/static/` → your static directory (optional)
+8. Click **Reload** at the top of the Web page
+9. Your API URL will be: `https://yourusername.pythonanywhere.com`
+
+10. Go back to your **Vercel** project settings, add:
+    - **Key**: `VITE_API_URL`
+    - **Value**: `https://yourusername.pythonanywhere.com`
+    - Redeploy Vercel
 
 ### Local Development (No changes needed)
 
