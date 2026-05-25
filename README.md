@@ -292,6 +292,38 @@ Open `http://localhost:5173` in your browser.
 
 ---
 
+## Deployment
+
+### Vercel (Frontend + API)
+
+Deploy everything (frontend + backend API) on Vercel with **no payment required**:
+
+1. Go to [Vercel](https://vercel.com/new) and import your `Ai_vison` repo
+2. **Root Directory**: set to `frontend/`
+3. Vite will auto-detect as the framework
+4. **No environment variables needed** — the Python serverless backend runs on the same domain
+5. Click **Deploy**
+
+That's it. Vercel automatically:
+- Builds the React frontend with Vite
+- Deploys the Python FastAPI backend as Serverless Functions (`api/index.py`)
+- Rewrites `/api/*` requests to the Python handler
+- Routes all other paths to the SPA (`index.html`)
+
+Your app will be live at `https://ai-vison.vercel.app` (or your custom Vercel subdomain).
+
+### Local Development (No changes needed)
+
+```bash
+# Terminal 1 — Backend (starts on port 8000)
+cd backend && uvicorn app.main:app --reload --port 8000
+
+# Terminal 2 — Frontend (starts on port 5173, proxies /api to localhost:8000)
+cd frontend && npm run dev
+```
+
+---
+
 ## Credits
 
 © 2026 **Adharsh M R**. All rights reserved.
