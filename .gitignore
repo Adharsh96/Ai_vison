@@ -33,3 +33,8 @@ Thumbs.db
 
 # Qodo/OpenCode
 .qodo/
+
+# Vercel dataset splits
+frontend/datasets/train.csv
+frontend/datasets/test.csv
+frontend/datasets/val.csv

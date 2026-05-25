@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+datasets/train.csv
+datasets/test.csv
+datasets/val.csv
+
+# Python cache
+__pycache__/
+*.pyc
